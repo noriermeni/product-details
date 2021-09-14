@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from './basket.module.scss';
 import {removeFromBasket} from "../../Redux/Actions/basket.actions";
@@ -10,8 +10,8 @@ const Basket = () => {
     const dispatch = useDispatch();
     const basketItems = useSelector((state: any) => state.basket.products);
 
-    const handleDeleteProduct = (id: number) => {
-        dispatch(removeFromBasket(id))
+    const handleDeleteProduct = (productId: number, variationId: number) => {
+        dispatch(removeFromBasket({productId: productId, variationId: variationId}))
     }
 
     return <div className={styles.container}>
@@ -34,7 +34,7 @@ const Basket = () => {
                     <span>{product.variations[0].retailPrice ? product.variations[0].retailPrice : product.regularPrice}</span>
                 </div>
                 <div className={styles.basketItemBox}>
-                    <span onClick={() => handleDeleteProduct(product.id)}>Delete Product </span>
+                    <span onClick={() => handleDeleteProduct(product.id, product.variations[0].id)}>Delete Product </span>
                 </div>
             </div>))}
         </div>

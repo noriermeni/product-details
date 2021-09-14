@@ -11,10 +11,9 @@ export const basketReducer = (state = initialState, action: any) => {
                 products: [...state.products, action.payload]
             }
         case 'REMOVE_FROM_BASKET':
-            const newProductList = state.products.filter((product: ProductDetails ) => Number(product.id) === Number(action.payload))
-            return {
-              products: newProductList,
-            }
+            return { products: state.products.filter((product: ProductDetails ) =>
+                product.id === action.payload.productId && product.variations[0].id !== action.payload.variationId
+            )}
         default:
             return state;
     }
