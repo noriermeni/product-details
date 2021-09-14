@@ -1,13 +1,4 @@
-
-@mixin for-size($size) {
-  @if $size == phone {
-    @media (max-width: 599px) { @content; }
-  } @else if $size == tablet {
-    @media (max-width: 992px) { @content; }
-  } @else if $size == desktop-up {
-    @media (max-width: 1200px) { @content; }
-  }
-}
+@import "../../mixins";
 
 .container {
   max-width: 1140px;
@@ -15,7 +6,9 @@
   margin: 10px auto;
   background-color: #FFFFFF;
   display: flex;
-  @include for-size(tablet) {
+  height: calc(100vh - 20px);
+  padding: 10px 0;
+  @include md{
     flex-direction: column-reverse;
   }
   .leftContainer {
@@ -37,14 +30,26 @@
         margin-left: 20px;
       }
     }
-    @include for-size(tablet) {
+    .box {
+      .buttonText {
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+    @include md{
       background-color: #ffffff63;
       .box {
         margin: 10px 5px;
       }
       .backButton {
         position: absolute;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
         top: 10px;
+        left: 0;
+        padding: 10px;
       }
     }
     .regularPrice {
@@ -63,16 +68,16 @@
   .rightContainer {
     flex: 1;
     border-left: 1px solid #D1D1D1;
-    @include for-size(tablet) {
+    @include md{
       max-height: 300px;
       border-left: unset;
     }
-    @include for-size(phone) {
+    @include xs{
       max-height: 250px;
     }
     .productDefaultImage {
       width: 100%;
-      @include for-size(tablet) {
+      @include md{
         width: auto;
         max-width: 100%;
         max-height: calc(100vh - 10px);
@@ -84,8 +89,21 @@
   }
 }
 
+.borderTop {
+  border-top: 1px solid #D1D1D1;
+  padding-top: 20px;
+}
+
 .selectVariation {
   max-width: max-content;
+  @include xs {
+    max-width: unset;
+  }
+}
+.addToBasketButton {
+  @include xs {
+    width: 100%;
+  }
 }
 .description {
   color: #D1D1D1;

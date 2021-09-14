@@ -1,7 +1,13 @@
+@import "../../mixins";
+
 .container {
   max-width: 1140px;
   width: 100%;
   margin: 5px auto;
+  @include md{
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .boxContainer {
@@ -17,9 +23,6 @@
     .image {
       width: 100%;
     }
-  }
-  .name {
-
   }
   .details {
     .priceContainer {

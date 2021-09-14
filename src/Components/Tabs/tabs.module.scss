@@ -6,21 +6,23 @@
         border-bottom: 1px solid #D1D1D1;
         .tabsTitle {
             margin-right: 20px;
-            padding: 5px 0;
+            padding: 5px 10px;
             text-transform: uppercase;
             border-bottom: 3px solid transparent;
             cursor: pointer;
+            font-size: 16px;
+            color: #C9C9C9;
         }
         .tabsTitleActive {
             margin-right: 20px;
-            padding: 5px 0;
+            padding: 5px 10px;
             text-transform: uppercase;
             font-weight: 700;
+            font-size: 16px;
             border-bottom: 3px solid #2186FA;
         }
     }
     .tabContent {
-        padding: 10px 0;
-        padding-right: 10px;
+        padding: 10px 10px 10px 0;
     }
 }

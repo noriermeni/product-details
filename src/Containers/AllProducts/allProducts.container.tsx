@@ -5,6 +5,8 @@ import styles from './allProducts.module.scss';
 import Black from '../../assets/images/black.jpg';
 import Brown from '../../assets/images/brown.jpg';
 import {ProductDetails} from "../../Types/productDetails";
+import {ProductTitle} from "../../Components/ProductTitle/productTitle.component";
+import {ProductDescription} from "../../Components/ProductDescription/productDescription.component";
 
 const AllProducts = () => {
     const [ products, setProducts ] = useState<Array<ProductDetails>>([
@@ -39,13 +41,13 @@ const AllProducts = () => {
         {React.Children.toArray(products && products.map(product => <div className={styles.boxContainer}>
             <Link to={{ pathname: `/product/${product.id}`, state: { product } }}>
                 <div className={styles.imageContainer}>
-                    <img src={product?.variations[0]?.img} alt="" className={styles.image}/>
+                    <img loading={'lazy'} src={product?.variations[0]?.img} alt="" className={styles.image}/>
                 </div>
-                <div className={styles.name}>
-                    <h3>{product.productName}</h3>
+                <div>
+                    <ProductTitle text={product.productName} fontSize={'lg'} />
                 </div>
                 <div className={styles.details}>
-                    <p>{product?.description}</p>
+                    <ProductDescription text={product?.description} fontSize={'md'} />
                     <div>
                         {product?.variations[0].retailPrice ? <>
                             <span className={styles.retailPrice}>${product?.variations[0].retailPrice}</span>

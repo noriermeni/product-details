@@ -13,6 +13,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 
 import Tabs from '../../Components/Tabs/tabs.component'
+import {Shimmer} from "react-shimmer";
+import {Price} from "../../Components/Price/price.component";
+import {ProductTitle} from "../../Components/ProductTitle/productTitle.component";
+import {ProductDescription} from "../../Components/ProductDescription/productDescription.component";
+import classNames from "classnames";
 
 export type ButtonTypes = 'Add to Cart' | 'Loading...' | 'Item added to cart!' | 'View Cart';
 
@@ -73,25 +78,18 @@ const Product = (props: any) => {
                     </div>
                 </Link>
                 <div className={styles.basketButton}>
-                    <Link to={'/basket'}>Basket</Link>
+                    <Link to={'/basket'}>Go To Basket</Link>
                 </div>
             </div>
             <div className={styles.box}>
-                <h2>{productDetails?.productName}</h2>
-                <p className={styles.description}>{productDetails?.description}</p>   
+                <ProductTitle text={productDetails?.productName} />
+                <ProductDescription text={productDetails?.description} />
             </div>
             <div className={styles.box}>
                 {productDetails?.details && productDetails?.description && <Tabs details={productDetails?.details} description={productDetails?.productDescription} />}
             </div>
             <div className={styles.box}>
-                <div>
-                    {selectedVariation?.retailPrice ? <>
-                        <span className={styles.retailPrice}>${selectedVariation?.retailPrice}</span>
-                        <span className={styles.regularPrice}>${selectedVariation?.regularPrice}</span>
-                    </> :
-                        <span className={styles.retailPrice}>${selectedVariation?.regularPrice}</span>
-                    }
-                </div>
+                <Price regularPrice={selectedVariation?.regularPrice} retailPrice={selectedVariation?.retailPrice} fontSize={'lg'} />
             </div>
             <div className={styles.box}>
                 <Form.Select onChange={handleColorSelect} className={styles.selectVariation}>
@@ -100,13 +98,20 @@ const Product = (props: any) => {
                     ))}
                 </Form.Select>
             </div>
-            <div className={styles.box}>
-                <Button onClick={handleAddToBasket} variant="primary" size="lg">{buttonText}</Button>
+            <div className={classNames({
+                [styles.box]: true,
+                [styles.borderTop]: true,
+            })}>
+                <Button onClick={handleAddToBasket} variant="primary" size="lg" className={styles.addToBasketButton}>
+                    <span className={styles.buttonText}>{buttonText}</span>
+                </Button>
             </div>
         </div>
 
         <div className={styles.rightContainer}>
-            {selectedVariation?.img && <img className={styles.productDefaultImage} src={selectedVariation?.img} alt={selectedVariation?.name}/>}
+            {selectedVariation?.img ?
+                <img loading={'lazy'} className={styles.productDefaultImage} src={selectedVariation?.img} alt={selectedVariation?.name}/>
+                : <Shimmer width={300} height={700} /> }
         </div>
     </div>
 }
