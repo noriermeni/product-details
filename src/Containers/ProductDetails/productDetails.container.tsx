@@ -30,13 +30,11 @@ const Product = (props: any) => {
         setProductDetails(props.location.state.product);
     }, [])
 
-    useEffect(()=>{
-        console.log(basketItems);
-    },[basketItems])
-
-    useEffect(() => {
-        console.log(productDetails);
-    }, [productDetails])
+    const findVariationProduct = (products: ProductDetails | undefined) => {
+        let productDetailsForBasket = JSON.parse(JSON.stringify(products));
+        productDetailsForBasket?.variations.splice(productDetailsForBasket?.variations.findIndex((idx: { isSelected: boolean; }) => !idx.isSelected), 1);
+        return productDetailsForBasket;
+    }
 
     const handleAddToBasket = () => {
         setTimeout(function(){ 
@@ -47,18 +45,12 @@ const Product = (props: any) => {
          }, 4000);
         setTimeout(function(){ 
             setButtonText('View Cart');
-         }, 6000);
-        let productDetailsForBasket = productDetails;
-        productDetailsForBasket?.variations.splice(productDetailsForBasket?.variations.findIndex(function(i){
-            return !i.isSelected;
-        }), 1);
-        console.log(productDetailsForBasket)
-        console.log(productDetails)
-        dispatch(addToBasket(productDetailsForBasket));
+        }, 6000);
+        const product = findVariationProduct(productDetails);
+        dispatch(addToBasket(product));
     }
 
     const handleColorSelect = (e: any) => {
-        console.log(e.target.value)
         let oldProductDetails = productDetails;
         oldProductDetails?.variations?.find(variation => {
             if(Number(variation.id) === Number(e.target.value)) {
@@ -68,7 +60,6 @@ const Product = (props: any) => {
                 variation.isSelected = false;
             }
         })
-        console.log(oldProductDetails)
         setProductDetails(oldProductDetails)
     }
 
@@ -76,9 +67,14 @@ const Product = (props: any) => {
         <div className={styles.leftContainer}>
             <div className={styles.backButton}>
                 <Link to={'/'}>
-                    <LeftArrow />
-                    <span className={styles.text}>All Products</span>
+                    <div className={styles.leftButton}>
+                        <LeftArrow />
+                        <p className={styles.text}>All Products</p>
+                    </div>
                 </Link>
+                <div className={styles.basketButton}>
+                    <Link to={'/basket'}>Basket</Link>
+                </div>
             </div>
             <div className={styles.box}>
                 <h2>{productDetails?.productName}</h2>

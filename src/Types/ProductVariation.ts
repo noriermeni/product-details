@@ -3,6 +3,6 @@ export interface ProductVariation {
     name: string;
     img: string;
     regularPrice: number;
-    retailPrice: number;
+    retailPrice?: number;
     isSelected: boolean;
 }

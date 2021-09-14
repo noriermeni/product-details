@@ -24,6 +24,19 @@
     flex-direction: column;
     justify-content: space-between;
     z-index: 9;
+    .backButton {
+      display: flex;
+      .leftButton {
+        display: flex;
+        .text{
+          margin-left: 5px;
+          padding-left: 5px;
+        }
+      }
+      .basketButton {
+        margin-left: 20px;
+      }
+    }
     @include for-size(tablet) {
       background-color: #ffffff63;
       .box {
@@ -32,10 +45,6 @@
       .backButton {
         position: absolute;
         top: 10px;
-        .text{
-          margin-left: 5px;
-          padding-left: 5px;
-        }
       }
     }
     .regularPrice {
@@ -56,6 +65,7 @@
     border-left: 1px solid #D1D1D1;
     @include for-size(tablet) {
       max-height: 300px;
+      border-left: unset;
     }
     @include for-size(phone) {
       max-height: 250px;
@@ -63,8 +73,12 @@
     .productDefaultImage {
       width: 100%;
       @include for-size(tablet) {
+        width: auto;
+        max-width: 100%;
         max-height: calc(100vh - 10px);
         object-fit: cover;
+        margin: 0 auto;
+        float: right;
       }
     }
   }
