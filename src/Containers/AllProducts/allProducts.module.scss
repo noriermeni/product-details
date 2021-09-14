@@ -1,0 +1,44 @@
+.container {
+  max-width: 1140px;
+  width: 100%;
+  margin: 5px auto;
+}
+
+.boxContainer {
+  border: 1px solid #EEEEEE;
+  border-radius: 5px;
+  max-width: 300px;
+  width: 100%;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
+  .imageContainer {
+    width: 100%;
+    .image {
+      width: 100%;
+    }
+  }
+  .name {
+
+  }
+  .details {
+    .priceContainer {
+      display: flex;
+      >span {
+
+      }
+    }
+    .regularPrice {
+      text-decoration-line: line-through;
+      color: #CBCBCB;
+      font-size: 30px;
+      font-weight: 600;
+    }
+    .retailPrice {
+      color: #4D4D4D;
+      font-size: 30px;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+  }
+}

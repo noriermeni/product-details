@@ -1,0 +1,26 @@
+.tabsContainer {
+    display: flex;
+    flex-direction: column;
+    .tabs {
+        display: flex;
+        border-bottom: 1px solid #D1D1D1;
+        .tabsTitle {
+            margin-right: 20px;
+            padding: 5px 0;
+            text-transform: uppercase;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+        }
+        .tabsTitleActive {
+            margin-right: 20px;
+            padding: 5px 0;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-bottom: 3px solid #2186FA;
+        }
+    }
+    .tabContent {
+        padding: 10px 0;
+        padding-right: 10px;
+    }
+}
